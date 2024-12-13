@@ -27,7 +27,7 @@ function fish_user_key_bindings
 end
 
 function fish_greeting
-  fortune
+  fortune | cowsay -r -C
 end
 
 function starship_transient_rprompt_func

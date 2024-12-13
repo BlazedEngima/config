@@ -6,4 +6,6 @@ coc-settings.json
 .luarc.json
 lazy-lock.json
 after
+state.yml
+qBittorrent/
 **/.DS_Store
