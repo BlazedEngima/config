@@ -8,4 +8,5 @@ lazy-lock.json
 after
 state.yml
 qBittorrent/
+fish_variables
 **/.DS_Store
