@@ -9,6 +9,7 @@
 
 local wezterm = require("wezterm")
 local act = wezterm.action
+local mux = wezterm.mux
 
 local config = {}
 -- Use config builder object if possible
@@ -17,42 +18,51 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 -- Settings
 config.color_scheme = "Tokyo Night"
 config.font = wezterm.font_with_fallback({
-  { family = "Hack Nerd Font",  scale = 1.1 },
+  { family = "Hack Nerd Font",  scale = 1.3 },
+  { family = "MesloLGS NF", scale = 1.1 },
   { family = "JetBrainsMono Nerd Font", scale = 1.1 },
   { family = "Iosevka Nerd Font",  scale = 1.24, weight = "Medium", },
   { family = "CaskaydiaCove Nerd Font",  scale = 1.2 },
+  { family = "Symbols Nerd Font", scale =1.1 },
 })
-config.window_background_opacity = 0.85
+config.window_background_opacity = 0.96
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
-config.default_domain = "WSL:Ubuntu"
+config.default_domain = "WSL:Ubuntu-24.04"
 
 -- Dim inactive panes
 config.inactive_pane_hsb = {
-  saturation = 0.24,
-  brightness = 0.5
+  saturation = 0.9,
+  brightness = 0.9
 }
+
 
 -- Keys
 config.leader = { key = "phys:Space", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
-  -- Send C-a when pressing C-a twice
+  -- Scroll settings
+  { key = "u",          mods = "LEADER",      action = act.ScrollByPage(-1) },
+  { key = "d",          mods = "LEADER",      action = act.ScrollByPage(1) },
+
+  -- Send C-Space when pressing C-Space twice
   { key = "phys:Space", mods = "LEADER|CTRL", action = act.SendKey { key = "phys:Space", mods = "CTRL" } },
   { key = "c",          mods = "LEADER",      action = act.ActivateCopyMode },
-  { key = "p",          mods = "CTRL",        action = act.ActivateCommandPalette },
+  { key = "p",          mods = "LEADER",      action = act.ActivateCommandPalette },
 
   -- Pane keybindings
-  { key = "h",          mods = "LEADER",      action = act.SplitVertical { domain = "CurrentPaneDomain" } },
+  { key = "s",          mods = "LEADER",      action = act.SplitVertical { domain = "CurrentPaneDomain" } },
   { key = "v",          mods = "LEADER",      action = act.SplitHorizontal { domain = "CurrentPaneDomain" } },
-  { key = "h",          mods = "CTRL",        action = act.ActivatePaneDirection("Left") },
-  { key = "j",          mods = "CTRL",        action = act.ActivatePaneDirection("Down") },
-  { key = "k",          mods = "CTRL",        action = act.ActivatePaneDirection("Up") },
-  { key = "l",          mods = "CTRL",        action = act.ActivatePaneDirection("Right") },
-  { key = "q",          mods = "CTRL",        action = act.CloseCurrentPane { confirm = false } },
+  { key = "h",          mods = "LEADER",      action = act.ActivatePaneDirection("Left") },
+  { key = "j",          mods = "LEADER",      action = act.ActivatePaneDirection("Down") },
+  { key = "k",          mods = "LEADER",      action = act.ActivatePaneDirection("Up") },
+  { key = "l",          mods = "LEADER",      action = act.ActivatePaneDirection("Right") },
+  { key = "q",          mods = "LEADER",      action = act.CloseCurrentPane { confirm = false } },
   { key = "z",          mods = "LEADER",      action = act.TogglePaneZoomState },
   { key = "o",          mods = "LEADER",      action = act.RotatePanes "Clockwise" },
+  { key = "i",          mods = "LEADER",      action = act.RotatePanes "CounterClockwise" },
+
   -- We can make separate keybindings for resizing panes
   -- But Wezterm offers custom "mode" in the name of "KeyTable"
   { key = "r",          mods = "LEADER",      action = act.ActivateKeyTable { name = "resize_pane", one_shot = false } },
@@ -62,6 +72,7 @@ config.keys = {
   { key = "[",          mods = "LEADER",      action = act.ActivateTabRelative(-1) },
   { key = "]",          mods = "LEADER",      action = act.ActivateTabRelative(1) },
   { key = "n",          mods = "LEADER",      action = act.ShowTabNavigator },
+  { key = "f",          mods = "LEADER",      action = act.ToggleFullScreen },
   {
     key = "e",
     mods = "LEADER",
@@ -71,7 +82,7 @@ config.keys = {
         { Foreground = { AnsiColor = "Fuchsia" } },
         { Text = "Renaming Tab Title...:" },
       },
-      action = wezterm.action_callback(function(window, pane, line)
+      action = wezterm.action_callback(function(window, _, line)
         if line then
           window:active_tab():set_title(line)
         end
@@ -138,6 +149,8 @@ wezterm.on("update-status", function(window, pane)
 
   -- Current working directory
   local basename = function(s)
+    s = tostring(s)
+
     -- Nothing a little regex can't fix
     return string.gsub(s, "(.*[/\\])(.*)", "%2")
   end
@@ -174,15 +187,18 @@ wezterm.on("update-status", function(window, pane)
   }))
 end)
 
---[[ Appearance setting for when I need to take pretty screenshots
-config.enable_tab_bar = false
-config.window_padding = {
-  left = '0.5cell',
-  right = '0.5cell',
-  top = '0.5cell',
-  bottom = '0cell',
+wezterm.on("gui-startup", function()
+  local _, _, window = mux.spawn_window{}
+  window:gui_window():maximize()
+end)
 
-}
---]]
+-- config.enable_tab_bar = true
+-- config.window_padding = {
+--   left = '0.5cell',
+--   right = '0.5cell',
+--   top = '0.5cell',
+--   bottom = '0cell',
+--
+-- }
 
 return config
