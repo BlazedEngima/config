@@ -26,9 +26,9 @@ function fish_user_key_bindings
     fish_vi_key_bindings --no-erase default
 end
 
-function fish_greeting
-  fortune | cowsay -r -C
-end
+#  function fish_greeting
+#    fortune | cowsay -r -C
+#  end
 
 function starship_transient_rprompt_func
     starship module time

@@ -1,5 +1,4 @@
 alias config="cd \"$XDG_CONFIG_HOME\""
-alias nvim="nvim.appimage"
 alias n="nvim"
 alias q="rlwrap -r $QHOME/l64/q"
 
