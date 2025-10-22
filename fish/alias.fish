@@ -1,10 +1,11 @@
 alias config="cd \"$XDG_CONFIG_HOME\""
 alias n="nvim"
 alias q="rlwrap -r $QHOME/l64/q"
-alias ls="eza"
-alias la="eza -lha"
-alias ll="eza -lh"
-alias lt="eza -lT"
+alias ls="eza --icons=auto --hyperlink"
+alias la="eza -lha --icons=auto --hyperlink --total-size"
+alias ll="eza -lh --icons=auto --hyperlink --total-size"
+alias lt="eza -lT --icons=auto --hyperlink --total-size"
+alias lf="eza -ld --icons=auto --hyperlink --total-size"
 
 function cdf -d "Navigate to directories using fzf"
   set selected $(find * -maxdepth 1 -type d 2>/dev/null | fzf \
