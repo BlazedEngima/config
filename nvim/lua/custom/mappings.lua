@@ -2,14 +2,14 @@ local M = {}
 
 M.general = {
   n = {
-    ["<A-h>"] = {
+    ["<A-[>"] = {
       function()
         require("nvchad.tabufline").move_buf(-1)
       end,
       "Move buffer left",
     },
 
-    ["<A-l>"] = {
+    ["<A-]>"] = {
       function()
         require("nvchad.tabufline").move_buf(1)
       end,
