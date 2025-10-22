@@ -35,10 +35,10 @@ $rust\
 $jobs\
 $memory_usage\
 [ ](fg:#242424)\
-$cmd_duration\
 $fill\
 $line_break\
 [╰╴](fg:#505050)\
+$cmd_duration\
 [$status\
 $character]($style)
 """
@@ -49,9 +49,9 @@ add_newline = true
 # Customization and activation of some modules:
 # Listed in the order of their position in the module row above
 [os]
+disabled = false
 format = "[$symbol ]($style)[| ](fg:white bold)"
 style = "fg:#1793d1"
-disabled = false
 
 [os.symbols]
 Alpine = ""
@@ -178,7 +178,7 @@ threshold = 75
 disabled = false
 
 [cmd_duration]
-format = '[  $duration ]($style)'
+format = '[ $duration ]($style)'
 style = 'fg:yellow'
 min_time = 500
 disabled = false
@@ -206,7 +206,7 @@ style = "yellow"
 symbol = " "
 
 [rust]
-format = "via [${symbol}#{version_prefix}${version}]($style)"
-version_prefix = "ver "
+format = "via [${symbol}#{version_format}${version}]($style)"
+version_format = "ver "
 style = "#B7410E"
 symbol = " "
