@@ -36,8 +36,9 @@ local plugins = {
   {
     "junegunn/fzf.vim",
     event = "VeryLazy",
-    dir = "~/.fzf",
-    build = "./install --all"
+    dependencies = {
+      "junegunn/fzf",
+    }
   },
   {
     "kevinhwang91/nvim-bqf",
@@ -98,10 +99,13 @@ local plugins = {
     end
   },
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = "VeryLazy",
+    dependencies = {
+      "nvim-lua/plenary.nvim"
+    },
     opts = function()
-      return require "custom.configs.null-ls"
+      return require "custom.configs.none-ls"
     end,
   },
   {
@@ -111,17 +115,17 @@ local plugins = {
       vim.g.rustfmt_autosave = 1
     end
   },
-  {
-    "neovim/nvim-lspconfig",
-    event = "VeryLazy",
-    dependencies = {
-      "williamboman/mason.nvim",
-    },
-    config = function()
-      require "plugins.configs.lspconfig"
-      require "custom.configs.lspconfig"
-    end,
-  },
+  -- {
+  --   "neovim/nvim-lspconfig",
+  --   event = "VeryLazy",
+  --   dependencies = {
+  --     "williamboman/mason.nvim",
+  --   },
+  --   config = function()
+  --     require "plugins.configs.lspconfig"
+  --     require "custom.configs.lspconfig"
+  --   end,
+  -- },
   {
     "williamboman/mason.nvim",
     opts = {

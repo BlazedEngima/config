@@ -1,12 +1,17 @@
+-- if not vim.lsp.config then
+--   vim.lsp.config = require("plugins.configs.lspconfig")
+--   on_attach = vim.lsp.config.on_attach
+--   capabilites = vim.lsp.config.capabilities
+-- end
+
 local base = require("plugins.configs.lspconfig")
 local on_attach = base.on_attach
 local capabilities = base.capabilities
 
-local lspconfig = require("lspconfig")
 local util = require "lspconfig/util"
 
 -- clangd setup
-lspconfig.clangd.setup({
+vim.lsp.config["clangd"] = {
   on_attach = function(client, bufnr)
 
     local bufopts = {noremap = true, silent = true, buffer = bufnr}
@@ -48,9 +53,9 @@ lspconfig.clangd.setup({
     completeUnimported = true,
     clangdFileStatus = true,
   },
-})
+}
 
-lspconfig.rust_analyzer.setup({
+vim.lsp.config["rust_analyzer"] = {
   on_attach = function(client, bufnr)
 
     local bufopts = {noremap = true, silent = true, buffer = bufnr}
@@ -84,17 +89,17 @@ lspconfig.rust_analyzer.setup({
       },
     }
   }
-})
+}
 
 -- Python setup
-lspconfig.pyright.setup({
+vim.lsp.config["pyright"] = {
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = {"python"},
-})
+}
 
 -- cmake setup
-lspconfig.cmake.setup({
+vim.lsp.config["cmake"] = {
     on_attach = on_attach,
     capabilities = capabilities,
-})
+}
