@@ -7,14 +7,14 @@ set -gx QHOME "$HOME/q/"
 set -gx VCPKG_ROOT "$HOME/.local/bin/vcpkg"
 
 switch $(uname)
-    case "Linux"
-        set -x OSTYPE 'Linux'
-    case "Darwin"
-	set -x OSTYPE 'macOS'
-    case '*BSD' 'DragonFly'
-	set -x OSTYPE 'BSD'
+    case Linux
+        set -x OSTYPE Linux
+    case Darwin
+        set -x OSTYPE macOS
+    case '*BSD' DragonFly
+        set -x OSTYPE BSD
     case '*'
-	set -x OSTYPE 'UNKNOWN'
+        set -x OSTYPE UNKNOWN
 end
 
 function fish_user_key_bindings
@@ -23,12 +23,12 @@ function fish_user_key_bindings
     fish_default_key_bindings -M insert
 
     # Enable vi mode
-    fish_vi_key_bindings --no-erase default
+    fish_vi_key_bindings --no-erase
 end
 
-#  function fish_greeting
-#    fortune | cowsay -r -C
-#  end
+function fish_greeting
+    fastfetch
+end
 
 function starship_transient_rprompt_func
     starship module time
@@ -54,13 +54,15 @@ end
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 if test -f /home/blazed/miniconda3/bin/conda
-    eval /home/blazed/miniconda3/bin/conda "shell.fish" "hook" $argv | source
+    eval /home/blazed/miniconda3/bin/conda "shell.fish" hook $argv | source
 else
     if test -f "/home/blazed/miniconda3/etc/fish/conf.d/conda.fish"
         . "/home/blazed/miniconda3/etc/fish/conf.d/conda.fish"
     else
-        set -x PATH "/home/blazed/miniconda3/bin" $PATH
+        set -x PATH /home/blazed/miniconda3/bin $PATH
     end
 end
 # <<< conda initialize <<<
 
+# uv
+fish_add_path "/home/Blazed/.local/share/../bin"

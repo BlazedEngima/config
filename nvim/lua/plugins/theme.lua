@@ -1,0 +1,1 @@
+/home/Blazed/.config/omarchy/current/theme/neovim.lua

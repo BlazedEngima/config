@@ -1,0 +1,24 @@
+-- Keymaps are automatically loaded on the VeryLazy event
+-- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+-- Add any additional keymaps hmap("n", "<leader>fT", function() Snacks.terminal() end, { desc = "Terminal (cwd)" })
+local map = LazyVim.safe_keymap_set
+
+-- -- Floating terminal
+-- map({ "n", "t" }, "<A-i>", function()
+--   Snacks.terminal(nil, { win = { border = "rounded", position = "float" }, cwd = LazyVim.root() })
+-- end, { desc = "Floating Terminal (Root Dir)" })
+--
+-- -- Live grep
+-- map("n", "<leader>fw", function()
+--   Snacks.picker.grep()
+-- end, { desc = "Live grep" })
+--
+-- -- File explorer
+-- map({ "n", "x" }, "<C-n>", function()
+--   Snacks.explorer()
+-- end, { desc = "File explorer" })
+--
+-- -- Old files
+-- map("n", "<leader>fo", function()
+--   Snacks.picker.recent()
+-- end, { desc = "File explorer" })
