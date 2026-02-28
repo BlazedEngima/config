@@ -27,5 +27,4 @@ return {
       },
     },
   },
-  "ethanuppal/bril.nvim",
 }
