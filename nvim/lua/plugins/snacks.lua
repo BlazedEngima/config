@@ -4,6 +4,17 @@ return {
     { "<leader>/", false },
     { "<leader>fT", false },
     { "<leader>ft", false },
+    { "<leader>gy", false },
+
+    -- LSP
+    {
+      "<leader>D",
+      function()
+        Snacks.picker.lsp_type_definitions()
+      end,
+      desc = "Go to type definition",
+    },
+
     -- Floating terminal
     {
       "<A-i>",

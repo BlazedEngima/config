@@ -199,7 +199,7 @@ ssh_only = true
 disabled = false
 
 [python]
-format = "via [${symbol}${pyenv_prefix}${version} (${virtualenv})]($style) "
+format = " via [${symbol}${pyenv_prefix}${version} (${virtualenv})]($style) "
 pyenv_version_name = false
 pyenv_prefix = "pyenv "
 style = "yellow"
