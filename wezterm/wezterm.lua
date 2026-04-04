@@ -30,6 +30,7 @@ config.window_decorations = "RESIZE"
 config.window_close_confirmation = "AlwaysPrompt"
 config.scrollback_lines = 3000
 config.default_workspace = "main"
+config.enable_wayland = true
 -- config.default_domain = "WSL:Ubuntu-24.04"
 
 -- Dim inactive panes
