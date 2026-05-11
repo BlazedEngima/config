@@ -3,4 +3,6 @@
 -- Add any additional options here
 vim.opt.relativenumber = true
 vim.opt.wrap = true
+vim.opt.linebreak = true
+vim.opt.breakindent = true
 vim.g.snacks_animate = false
