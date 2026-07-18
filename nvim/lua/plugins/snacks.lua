@@ -38,7 +38,7 @@ return {
       desc = "Live grep",
     },
 
-    -- Live grep
+    -- Live grep word
     {
       "<leader>fq",
       function()
