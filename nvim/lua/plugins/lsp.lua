@@ -6,6 +6,13 @@ return {
     servers = {
       pyright = {},
       clangd = {
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--header-insertion=iwyu",
+        },
         settings = {
           ["clangd"] = {
             inlayHints = {
