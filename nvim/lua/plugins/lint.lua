@@ -1,0 +1,31 @@
+-- return {
+--   "mfussenegger/nvim-lint",
+--   event = { "BufReadPre", "BufNewFile" },
+--   config = function()
+--     local lint = require("lint")
+--
+--     lint.linters_by_ft = {
+--       c = { "cppcheck" },
+--       cpp = { "cppcheck" },
+--     }
+--
+--     -- Maximize cppcheck strictness
+--     lint.linters.cppcheck.args = {
+--       "--template={file}:{line}:{column}: {severity}: {message}",
+--       "--enable=warning,style,performance,portability,information",
+--       "--inconclusive", -- Reports deeper/potential issues even if not 100% certain
+--       "--inline-suppr", -- Allows inline suppression comments in your code
+--       "--suppress=missingIncludeSystem", -- Prevents spamming errors for standard libraries like <vector>
+--       "--language=c++",
+--       "-",
+--     }
+--
+--     local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+--     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+--       group = lint_augroup,
+--       callback = function()
+--         lint.try_lint()
+--       end,
+--     })
+--   end,
+-- }
