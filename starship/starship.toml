@@ -206,7 +206,7 @@ style = "yellow"
 symbol = " "
 
 [rust]
-format = "via [${symbol}#{version_format}${version}]($style)"
-version_format = "ver "
-style = "#B7410E"
-symbol = " "
+format = 'via [$symbol$version]($style) '
+version_format = 'v${raw}'
+style = '#B7410E'
+symbol = ' '
